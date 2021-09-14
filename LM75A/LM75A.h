@@ -22,11 +22,18 @@
 
 #include <stdint.h>
 
-#include "soft_i2c.h"
+
 
 #include "User_Conf.h"
 #include "complement.h"
 
+#define USE_SOFTI2C							flase
+
+#if USE_SOFTI2C
+#include "soft_i2c.h"
+#else
+#include "i2c.h"
+#endif
 
 /*LM75AµÄIICµØÖ·*/
 /*0b1001111X = 0x9E*/
@@ -43,9 +50,11 @@
 
 
 float Read_LM75A_Temp(void);
+#if USE_SOFTI2C
 uint8_t LM75_readoneByte(uint8_t addr);
 void LM75_writeoneByte(uint8_t addr, uint8_t dt);
 uint16_t LM75_readtwoByte(uint8_t addr);
 void LM75_writetwoByte(uint8_t addr, uint16_t dt);
+#endif
 
 #endif

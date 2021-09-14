@@ -23,7 +23,7 @@ float Read_LM75A_Temp(void)
 {
 	float Temp = 0.00;
 	uint8_t val[2] = {0};
-	
+#if USE_SOFTI2C
 	I2C_Start();
 	I2C_Send_Byte(LM75A_IIC_ADDRESS);
 	if(I2C_Wait_Ack() != 0) goto fail;
@@ -42,6 +42,30 @@ float Read_LM75A_Temp(void)
 	
 fail:
 	I2C_Stop();
+#else
+	HAL_StatusTypeDef Status;
+	Status = HAL_I2C_Master_Transmit(&hi2c1,LM75A_IIC_ADDRESS,LM75A_TEMP_ADDRESS,1,0xff);
+//	if(Status == HAL_OK)
+//	{
+//		Serial_println("发送成功");
+//	}
+//	else
+//	{
+//		Serial_println("发送失败");
+//	}
+	
+	Status = HAL_I2C_Master_Receive(&hi2c1,LM75A_IIC_ADDRESS,val,2,0xff);
+//	if(Status == HAL_OK)
+//	{
+//		Serial_println("接收成功");
+////		Serial_println("val[0] = 0x%02x",val[0]);
+////		Serial_println("val[1] = 0x%02x",val[1]);
+//	}
+//	else
+//	{
+//		Serial_println("接收失败");
+//	}
+#endif
 
 //	根据11位的Temp数据来计算Temp值的方法： 
 //1. 若D10＝0，温度值（℃）＝＋Temp数据的二进制补码）×0.125℃； 
@@ -64,6 +88,7 @@ fail:
 	return Temp;
 }
 
+#if USE_SOFTI2C
 //read one Byte
 uint8_t LM75_readoneByte(uint8_t addr)
 {
@@ -142,6 +167,8 @@ void LM75_writetwoByte(uint8_t addr, uint16_t dt)
 	I2C_Wait_Ack();
 	I2C_Stop();
 	HAL_Delay(10);
+
 }
+#endif
 
 

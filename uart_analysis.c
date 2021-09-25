@@ -24,7 +24,7 @@
 extern DMA_HandleTypeDef hdma_usart1_rx;
 #endif
 uint8_t UART1_Rec_Data[UART1_REC_LEN_MAX] = {0x00};	//接收缓冲区数组
-uint8_t UART1_Rec_Len = 0;	//接收长度
+uint32_t UART1_Rec_Len = 0;	//接收长度
 uint8_t UART1_Rec_Flag = false;//接收完成标志位
 #endif
 
@@ -33,7 +33,7 @@ uint8_t UART1_Rec_Flag = false;//接收完成标志位
 extern DMA_HandleTypeDef hdma_usart2_rx;
 #endif
 uint8_t UART2_Rec_Data[UART2_REC_LEN_MAX] = {0x00};	//接收缓冲区数组
-uint8_t UART2_Rec_Len = 0;	//接收长度
+uint32_t UART2_Rec_Len = 0;	//接收长度
 uint8_t UART2_Rec_Flag = false;//接收完成标志位
 #endif
 
@@ -42,7 +42,7 @@ uint8_t UART2_Rec_Flag = false;//接收完成标志位
 extern DMA_HandleTypeDef hdma_usart3_rx;
 #endif
 uint8_t UART3_Rec_Data[UART3_REC_LEN_MAX] = {0x00};	//接收缓冲区数组
-uint8_t UART3_Rec_Len = 0;	//接收长度
+uint32_t UART3_Rec_Len = 0;	//接收长度
 uint8_t UART3_Rec_Flag = false;//接收完成标志位
 #endif
 

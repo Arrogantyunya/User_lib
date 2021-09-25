@@ -28,14 +28,14 @@
 #define UART3_ENABLE_IRQRX		false
 
 
-#define UART1_REC_LEN_MAX		64		//接收缓冲区大小宏
+#define UART1_REC_LEN_MAX		512		//接收缓冲区大小宏
 #define UART2_REC_LEN_MAX		64		//接收缓冲区大小宏
 #define UART3_REC_LEN_MAX		64		//接收缓冲区大小宏
 
 #if UART1_ENABLE_IRQRX
-#define UART1_ENABLE_DMARX		false	//UART1 DMA接收使能
+#define UART1_ENABLE_DMARX		true	//UART1 DMA接收使能
 extern uint8_t UART1_Rec_Data[UART1_REC_LEN_MAX];	//接收缓冲区数组
-extern uint8_t UART1_Rec_Len;	//接收长度
+extern uint32_t UART1_Rec_Len;	//接收长度
 extern uint8_t UART1_Rec_Flag;//接收完成标志位
 void MY_UART1_IRQHandler(void);//串口中断处理函数
 void UART1_Data_Analysis(void);//串口数据分析函数
@@ -44,7 +44,7 @@ void UART1_Data_Analysis(void);//串口数据分析函数
 #if UART2_ENABLE_IRQRX
 #define UART2_ENABLE_DMARX		true	//UART2 DMA接收使能
 extern uint8_t UART2_Rec_Data[UART2_REC_LEN_MAX];	//接收缓冲区数组
-extern uint8_t UART2_Rec_Len;	//接收长度
+extern uint32_t UART2_Rec_Len;	//接收长度
 extern uint8_t UART2_Rec_Flag;//接收完成标志位
 void MY_UART2_IRQHandler(void);//串口中断处理函数
 void UART2_Data_Analysis(void);//串口数据分析函数
@@ -53,7 +53,7 @@ void UART2_Data_Analysis(void);//串口数据分析函数
 #if UART3_ENABLE_IRQRX
 #define UART3_ENABLE_DMARX		true	//UART3 DMA接收使能
 extern uint8_t UART3_Rec_Data[UART3_REC_LEN_MAX];	//接收缓冲区数组
-extern uint8_t UART3_Rec_Len;	//接收长度
+extern uint32_t UART3_Rec_Len;	//接收长度
 extern uint8_t UART3_Rec_Flag;//接收完成标志位
 void MY_UART3_IRQHandler(void);//串口中断处理函数
 void UART3_Data_Analysis(void);//串口数据分析函数
